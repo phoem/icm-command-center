@@ -31,7 +31,9 @@ message to this chat as if the user typed it. Show only the widget plus one shor
 1. A workflow is any top-level folder in the workspace root that contains both `CLAUDE.md` and
    `CONTEXT.md` and whose name does not start with `_`. List them with the folder names.
 2. Title = the folder name. Description = about 8 words taken from the first lines of the folder's own
-   `CLAUDE.md`. Read nothing outside the workflow folders and the root `CLAUDE.md`.
+   `CLAUDE.md`. If that `CLAUDE.md` is only a pointer (such as `@AGENTS.md`, as icm-architect writes it),
+   take the description from the folder's `AGENTS.md` instead. Read nothing outside the workflow folders
+   and the root `CLAUDE.md`.
 3. Each card has two buttons:
    - **Start**: `Run the <title> workflow. Follow its CLAUDE.md and ask me the questions it needs.`
    - **Results**: `Show me the results and output files for the <title> workflow: list the most recent ones with clickable links and a one-line summary of each.`

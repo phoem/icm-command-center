@@ -7,6 +7,10 @@ section for building new workflows, knowledge libraries, context maps and more.
 Every button sends a ready-made prompt to the chat, so running a workflow or checking its output is
 one click instead of a typed request.
 
+It is a companion to [icm-architect](https://github.com/RinDig/icm-architect), the skill that designs
+ICM workspaces. Use icm-architect to build the workspace and its workflows, then use this skill to run
+them and find their results.
+
 ## What it shows
 
 **Run a workflow** — one card for every workflow in the workspace:
@@ -22,7 +26,8 @@ New workflow, Knowledge library, Context map, Repo edit map, Restructure to ICM.
 
 - Claude Code with the `visualize` tools (`show_widget` / `read_me`) available — the dashboard is an
   inline widget.
-- The `icm-architect` skill, for the Create buttons.
+- The [icm-architect](https://github.com/RinDig/icm-architect) skill, for the Create buttons. The
+  workflow cards work without it in any workspace laid out the ICM way.
 - A POSIX shell to run `fingerprint.sh` (Git Bash on Windows, macOS, Linux). It uses `sha1sum`
   where available and falls back to `shasum -a 1` (macOS).
 
@@ -85,8 +90,12 @@ A workflow is any **top-level folder** in the workspace root that:
 1. contains both `CLAUDE.md` and `CONTEXT.md`, and
 2. has a name that does not start with `_`.
 
+Workflows created with [icm-architect](https://github.com/RinDig/icm-architect) have a `CONTEXT.md`,
+and in a Claude Code workspace a `CLAUDE.md` pointer to their `AGENTS.md`, so they appear on the
+dashboard without any extra setup.
+
 The card title is the folder name; the description is about eight words taken from the top of the
-folder's `CLAUDE.md`. Add a folder that meets these rules and it appears on the dashboard; rename or
+folder's `CLAUDE.md`, or from its `AGENTS.md` when `CLAUDE.md` is only an `@AGENTS.md` pointer. Add a folder that meets these rules and it appears on the dashboard; rename or
 remove it (or delete either file) and it drops off.
 
 ## Caching
@@ -105,8 +114,8 @@ On each run, `fingerprint.sh` hashes the current workflow folder names and compa
 - **No match** (a workflow was added, removed or renamed) — Claude says so and rebuilds.
 - **`cache/` missing** — Claude builds the widget and creates `cache/` with both files.
 
-The fingerprint covers folder **names** only. If you change a workflow's `CLAUDE.md` description and
-want the card text updated, ask for a rebuild.
+The fingerprint covers folder **names** only. If you change a workflow's `CLAUDE.md` or `AGENTS.md`
+description and want the card text updated, ask for a rebuild.
 
 ## Files
 
